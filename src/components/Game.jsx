@@ -12,7 +12,6 @@ const GET_STATUS = gql`
     status(player: $id) {
       id
       points
-      nextTurn
       player {
         id
         name
@@ -27,6 +26,7 @@ const GET_STATUS = gql`
 const CANCEL_INVITE = gql`
 mutation CancelInvite($from: String!) {
   cancel(from: $from) {
+    id
     name
     invite
   }
@@ -44,7 +44,6 @@ mutation Signup($name: String!, $secret: String!) {
 
 const Status = ({game}) => (<div>
   <div>Current Score : {game.player.score}</div>
-  <div>Time left in the round : {game.nextTurn}</div>
   <h2>Current loot at each location</h2>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
@@ -106,9 +105,6 @@ class Game extends React.Component {
               <Status game={data.status} />
               <Units player={data.status.player} />
               <p>
-                <Button component={Link} to="/rules" variant="contained" color="secondary">Rules</Button> 
-                <Button component={Link} to="/leaderboard" variant="contained" color="secondary">Leaderboard</Button>
-                
                 {data.status.player.invite ? 
                   <Mutation mutation={CANCEL_INVITE} key={this.props.myPlayer.id}>
                   {cancelInvite => (
@@ -121,6 +117,9 @@ class Game extends React.Component {
                 </Mutation> : 
                   <Button component={Link} to="/recruit" variant="contained" color="primary">Recruit</Button>}
               </p>
+              <p>
+                <Button component={Link} to="/rules" variant="contained" color="secondary">Rules</Button> 
+                <Button component={Link} to="/leaderboard" variant="contained" color="secondary">Leaderboard</Button></p>
             </div>
           );
         }}

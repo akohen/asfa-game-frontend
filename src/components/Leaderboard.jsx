@@ -16,6 +16,7 @@ const Scores = () => (
     query={gql`
       {
         players {
+          id
           name
           score
         }
@@ -29,8 +30,8 @@ const Scores = () => (
 
       const Players = () => data.players
         .sort((a,b) => b.score - a.score)
-        .map(({ name, score }) => (
-        <TableRow key={name}>
+        .map(({ id, name, score }) => (
+        <TableRow key={id}>
           <TableCell>{name}</TableCell>
           <TableCell align="right">{score}</TableCell>
         </TableRow>

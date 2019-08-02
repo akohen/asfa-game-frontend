@@ -17,7 +17,7 @@ const Panel = styled(Paper)({
 
 const GET_PLAYERS = gql`
   query listPlayers($id: String) {
-    players(canTradeWith: $id) {
+    players(canInteractWith: $id) {
       id
       name
     }
@@ -77,7 +77,7 @@ function Recruit(props) {
     <p>This will cost each of you one point and will add points to the bases of the other factions</p>
     <p>The other player will need to do the same thing on his side to confirm</p>
     <p>You will not be able to hire another unit with the same player for the rest of the game</p>
-    <Mutation mutation={CREATE_INVITE} key='A'>
+    <Mutation mutation={CREATE_INVITE} key={props.myPlayer.id}>
     {interact => (
       <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
       <Grid item xs={4}>
