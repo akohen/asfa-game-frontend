@@ -10,6 +10,7 @@ import Rules from './components/Rules';
 import Game from './components/Game';
 import Leaderboard from './components/Leaderboard';
 import Recruit from './components/Recruit';
+import Reset from './components/Reset';
 
 import theme from './theme';
 
@@ -43,6 +44,9 @@ const App = () => {
       }/>
       <Route path="/rules" component={Rules} />
       <Route path="/leaderboard" component={Leaderboard} />
+      <Route path='/reset' render={(props) => 
+        <Reset {...props} myPlayer={{id, setId, secret, setSecret}} />
+      }/>
       <Route path='/recruit' render={(props) => 
         <Recruit {...props} myPlayer={{id, setId, secret, setSecret}} />
       }/>
