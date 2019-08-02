@@ -21,6 +21,7 @@ const Scores = () => (
         }
       }
     `}
+    pollInterval={15000}
   >
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;

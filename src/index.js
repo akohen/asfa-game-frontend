@@ -10,9 +10,10 @@ import ApolloClient from "apollo-boost";
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Rules from './pages/Rules';
-import Game from './pages/Game';
-import Leaderboard from './pages/Leaderboard';
+import Rules from './components/Rules';
+import Game from './components/Game';
+import Leaderboard from './components/Leaderboard';
+import Recruit from './components/Recruit';
 
 import theme from './theme';
 import './index.css';
@@ -29,6 +30,7 @@ ReactDOM.render(<Router>
       <Route exact path="/" component={Game} />
       <Route path="/rules" component={Rules} />
       <Route path="/leaderboard" component={Leaderboard} />
+      <Route path="/recruit" component={Recruit} />
     </ThemeProvider>
   </ApolloProvider>
 </Router>, document.getElementById('root'));
