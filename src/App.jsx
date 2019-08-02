@@ -14,7 +14,7 @@ import Recruit from './components/Recruit';
 import theme from './theme';
 
 const client = new ApolloClient({
-  uri: 'http://127.0.0.1:4000',
+  uri: 'https://asfa-game.appspot.com/',
 });
 
 const App = () => (

@@ -14,6 +14,7 @@ const GET_STATUS = gql`
       points
       nextTurn
       player {
+        id
         name
         score
         units
