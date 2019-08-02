@@ -16,8 +16,8 @@ const Panel = styled(Paper)({
 });
 
 const GET_PLAYERS = gql`
-  {
-    players {
+  query listPlayers($id: String) {
+    players(canTradeWith: $id) {
       id
       name
     }
@@ -42,7 +42,7 @@ function Recruit(props) {
 
   function sendInteract(unit, interact) {
     if(playerId !== '') {
-      interact({ variables: { from: "A", to: playerId, unit} })
+      interact({ variables: { from: props.myPlayer.id, to: playerId, unit} })
       props.history.push('/');
     }
   }
@@ -51,7 +51,7 @@ function Recruit(props) {
     <Panel>
       <h2>Hiring a unit</h2>
     <FormControl>
-    <Query query={GET_PLAYERS}>
+    <Query query={GET_PLAYERS} variables={{id: props.myPlayer.id}}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
@@ -65,7 +65,7 @@ function Recruit(props) {
             Select a player
           </MenuItem>
           {data.players.map(({ id, name }) => (
-            <MenuItem key={id} value={name}>{id}</MenuItem>
+            <MenuItem key={id} value={id}>{name}</MenuItem>
           ))}
         </Select>);
     }}

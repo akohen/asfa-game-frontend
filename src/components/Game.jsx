@@ -8,8 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import Signup from './Signup';
 
 const GET_STATUS = gql`
-  {
-    status {
+  query Status($id: String!) {
+    status(player: $id) {
       id
       points
       nextTurn
@@ -29,6 +29,15 @@ mutation CancelInvite($from: String!) {
   cancel(from: $from) {
     name
     invite
+  }
+}
+`;
+
+const SIGNUP = gql`
+mutation Signup($name: String!, $secret: String!) {
+  signup(name: $name, secret: $secret) {
+    id
+    name
   }
 }
 `;
@@ -68,25 +77,26 @@ const Units = ({player}) => (
 );
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {player: 'test'};
-  }
+  secret = Math.random().toString(36).substring(2);
 
-  register(player) {
-    this.setState({player});
-    console.log(this.state)
-  }
-
-  cancel() {
-    console.log("cancel")
+  register(d) {
+    this.props.myPlayer.setId(d.id);
+    this.props.myPlayer.setSecret(this.secret);
   }
 
   render() {
-    if(this.state.player === null) {
-      return (<Signup register={(i) => this.register(i)} />);
+    if(this.props.myPlayer.id === '') {
+      return (
+      <Mutation mutation={SIGNUP} onCompleted={(d) => {this.register(d.signup)}}>
+        {signup => (
+          <Signup register={(n) => signup(
+            { variables: { name: n, secret: this.secret } }
+          )} />
+        )}
+      </Mutation>
+      );
     } else return (
-      <Query query={GET_STATUS} pollInterval={5000}>
+      <Query query={GET_STATUS} pollInterval={5000} variables={{ id: this.props.myPlayer.id }}>
         {({ loading, error, data, refetch }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
@@ -100,10 +110,10 @@ class Game extends React.Component {
                 <Button component={Link} to="/leaderboard" variant="contained" color="secondary">Leaderboard</Button>
                 
                 {data.status.player.invite ? 
-                  <Mutation mutation={CANCEL_INVITE}>
+                  <Mutation mutation={CANCEL_INVITE} key={this.props.myPlayer.id}>
                   {cancelInvite => (
                     <Button onClick={() => {
-                      cancelInvite({ variables: { from: 'A' } });
+                      cancelInvite({ variables: { from: this.props.myPlayer.id } });
                       refetch();
                     }}
                     variant="contained" color="primary">Cancel</Button>

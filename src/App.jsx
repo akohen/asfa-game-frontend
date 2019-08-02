@@ -14,22 +14,42 @@ import Recruit from './components/Recruit';
 import theme from './theme';
 
 const client = new ApolloClient({
-  uri: 'https://asfa-game.appspot.com/',
+  uri: 'http://127.0.0.1:4000',
 });
 
-const App = () => (
+const useStateWithLocalStorage = localStorageKey => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ''
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [localStorageKey, value]);
+
+  return [value, setValue];
+};
+
+const App = () => {
+  const [id, setId] = useStateWithLocalStorage('player_id');
+  const [secret, setSecret] = useStateWithLocalStorage('player_secret');
+
+  return (
 <Router>
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Route exact path="/" component={Game} />
+      <Route exact path='/' render={(props) => 
+        <Game {...props} myPlayer={{id, setId, secret, setSecret}} />
+      }/>
       <Route path="/rules" component={Rules} />
       <Route path="/leaderboard" component={Leaderboard} />
-      <Route path="/recruit" component={Recruit} />
+      <Route path='/recruit' render={(props) => 
+        <Recruit {...props} myPlayer={{id, setId, secret, setSecret}} />
+      }/>
     </ThemeProvider>
   </ApolloProvider>
 </Router>
-);
+)};
 
 export default App;
 
