@@ -16,6 +16,7 @@ const Component = () => (
     <p>If your most numerous units are tied, no unit is sent this round. You lose 5 points if you don't send any unit during a round.</p>
     <p>At the beginning of each round, all units are lost, and the bases get new points</p>
     <p>The player with the most points after 4 rounds wins the game</p>
+    <p>Trigger test</p>
     <Button component={Link} to="/" variant="contained" color="primary">Home</Button> 
   </Rules>
 );
