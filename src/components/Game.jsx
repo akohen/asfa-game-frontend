@@ -43,7 +43,7 @@ mutation Signup($name: String!, $secret: String!) {
 `;
 
 const Status = ({game}) => (<div>
-  <div>Current Score : {game.player.score}</div>
+  <h2>Hello {game.player.name}</h2>
   <h2>Current loot at each location</h2>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
@@ -61,6 +61,7 @@ const Status = ({game}) => (<div>
 const Units = ({player}) => (
 <div>
   <h2>You currently have</h2>
+  <h3>{player.score} points</h3>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
       <Paper>Pirate <div>{player.units[0]}</div></Paper>

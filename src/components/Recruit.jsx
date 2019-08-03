@@ -30,6 +30,8 @@ mutation CreateInvite($from: String!, $to: String!, $unit: Int!){
     id
     name
     invite
+    score
+    units
   }
 }`;
 
