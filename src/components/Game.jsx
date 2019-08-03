@@ -6,12 +6,14 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Signup from './Signup';
+import Countdown, { zeroPad } from 'react-countdown-now';
 
 const GET_STATUS = gql`
   query Status($id: String!) {
     status(player: $id) {
       id
       points
+      nextRound
       player {
         id
         name
@@ -44,6 +46,7 @@ mutation Signup($name: String!, $secret: String!) {
 
 const Status = ({game}) => (<div>
   <h2>Hello {game.player.name}</h2>
+  <p><Countdown date={Number(game.nextRound)} renderer={({ minutes, seconds }) => (<span>{minutes}:{zeroPad(seconds,2)}</span>)}/> to the end of the round</p>
   <h2>Current loot at each location</h2>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
