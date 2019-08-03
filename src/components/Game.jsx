@@ -5,7 +5,6 @@ import { gql } from "apollo-boost";
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Signup from './Signup';
 import Countdown, { zeroPad } from 'react-countdown-now';
 
@@ -77,13 +76,22 @@ const Units = ({player}) => (
   <h3>{player.score} points</h3>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
-      <Paper>Pirate <div>{player.units[0]}</div></Paper>
+      <Paper>
+        <img width="100%" alt="Pirate" src={ require('../img/pirate.png') } />
+        <div>{player.units[0]}</div>
+      </Paper>
     </Grid>
     <Grid item xs={4}>
-      <Paper>Samurai <div>{player.units[1]}</div></Paper>
+      <Paper>
+      <img width="100%" alt="Samurai" src={ require('../img/samurai.png') } />
+      <div>{player.units[1]}</div>
+    </Paper>
     </Grid>
     <Grid item xs={4}>
-      <Paper>Viking <div>{player.units[2]}</div></Paper>
+      <Paper>
+        <img width="100%" alt="Viking" src={ require('../img/viking.png') } />
+        <div>{player.units[2]}</div>
+      </Paper>
     </Grid>
   </Grid>
 </div>
