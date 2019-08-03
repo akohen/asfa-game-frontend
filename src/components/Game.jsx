@@ -52,19 +52,19 @@ const Status = ({game}) => (<div>
     <Grid item xs={4}>
       <Paper>
         <img width="100%" alt="Pirate Ship" src={ require('../img/pirate-ship.png') } />
-        <div>{game.points[0]}</div>
+        <div>{game.points[0]} pts</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
         <img width="100%" alt="Japanese Ship" src={ require('../img/japanese-ship.png') } />
-        <div>{game.points[1]}</div>
+        <div>{game.points[1]} pts</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
         <img width="100%" alt="Viking Ship" src={ require('../img/viking-ship.png') } />
-        <div>{game.points[2]}</div>
+        <div>{game.points[2]} pts</div>
       </Paper>
     </Grid>
   </Grid>
@@ -72,25 +72,24 @@ const Status = ({game}) => (<div>
 
 const Units = ({player}) => (
 <div>
-  <h2>You currently have</h2>
-  <h3>{player.score} points</h3>
+  <h2>You currently have {player.score} points</h2>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
       <Paper>
         <img width="100%" alt="Pirate" src={ require('../img/pirate.png') } />
-        <div>{player.units[0]}</div>
+        <div>x{player.units[0]}</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
       <img width="100%" alt="Samurai" src={ require('../img/samurai.png') } />
-      <div>{player.units[1]}</div>
+      <div>x{player.units[1]}</div>
     </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
         <img width="100%" alt="Viking" src={ require('../img/viking.png') } />
-        <div>{player.units[2]}</div>
+        <div>x{player.units[2]}</div>
       </Paper>
     </Grid>
   </Grid>
