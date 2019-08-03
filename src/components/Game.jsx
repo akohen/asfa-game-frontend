@@ -46,7 +46,7 @@ mutation Signup($name: String!, $secret: String!) {
 
 const Status = ({game}) => (<div>
   <h2>Hello {game.player.name}</h2>
-  <p><Countdown date={Number(game.nextRound)} renderer={({ minutes, seconds }) => (<span>{minutes}:{zeroPad(seconds,2)}</span>)}/> to the end of the round</p>
+  <p><Countdown date={Number(game.nextRound)} renderer={({ minutes, seconds }) => (<span>{zeroPad(minutes,2)}:{zeroPad(seconds,2)}</span>)}/> to the end of the round</p>
   <h2>Current loot at each location</h2>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
