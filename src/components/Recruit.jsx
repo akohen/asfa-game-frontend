@@ -53,7 +53,7 @@ function Recruit(props) {
     <Panel>
       <h2>Hiring a unit</h2>
     <FormControl>
-    <Query query={GET_PLAYERS} variables={{id: props.myPlayer.id}}>
+    <Query query={GET_PLAYERS} pollInterval={1000} variables={{id: props.myPlayer.id}}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
