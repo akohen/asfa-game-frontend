@@ -119,6 +119,10 @@ class Game extends React.Component {
       <Query query={GET_STATUS} pollInterval={5000} variables={{ id: this.props.myPlayer.id }}>
         {({ loading, error, data, refetch }) => {
           if (loading) return "Loading...";
+          if (error && error.message === 'GraphQL error: Player not found') return (<div>
+            <p>Your saved data could not be found</p>
+            <Button component={Link} to="/reset" variant="contained" color="secondary">Click here to start a new game</Button> 
+          </div>)
           if (error) return `Error! ${error.message}`;
 
           return (

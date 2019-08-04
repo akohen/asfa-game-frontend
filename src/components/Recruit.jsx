@@ -66,7 +66,7 @@ function Recruit(props) {
           <MenuItem value="" disabled>
             Select a player
           </MenuItem>
-          {data.players.map(({ id, name }) => (
+          {data.players.sort((a,b) => ('' + a.name).localeCompare(b.name)).map(({ id, name }) => (
             <MenuItem key={id} value={id}>{name}</MenuItem>
           ))}
         </Select>);
