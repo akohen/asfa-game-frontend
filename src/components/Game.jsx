@@ -14,6 +14,10 @@ const GET_STATUS = gql`
       id
       points
       nextRound
+      lastRound {
+        units
+        unitWorth
+      }
       player {
         id
         name
@@ -51,23 +55,29 @@ const Status = ({game}) => (<div>
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
       <Paper>
+        Pirates' loot
         <img width="100%" alt="Pirate Ship" src={ require('../img/pirate-ship.png') } />
         <div>{game.points[0]} pts</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
+        Samurai's loot
         <img width="100%" alt="Japanese Ship" src={ require('../img/japanese-ship.png') } />
         <div>{game.points[1]} pts</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
+        Vikings' loot
         <img width="100%" alt="Viking Ship" src={ require('../img/viking-ship.png') } />
         <div>{game.points[2]} pts</div>
       </Paper>
     </Grid>
   </Grid>
+  {game.lastRound !== null &&
+    <p>In the last round there were {game.lastRound.units[0]} pirates, {game.lastRound.units[1]} samurai, {game.lastRound.units[2]} vikings</p>
+  }
 </div>);
 
 const Units = ({player}) => (
@@ -76,18 +86,21 @@ const Units = ({player}) => (
   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
     <Grid item xs={4}>
       <Paper>
+        Pirates
         <img width="100%" alt="Pirate" src={ require('../img/pirate.png') } />
         <div>x{player.units[0]}</div>
       </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
-      <img width="100%" alt="Samurai" src={ require('../img/samurai.png') } />
-      <div>x{player.units[1]}</div>
+        Samurai
+        <img width="100%" alt="Samurai" src={ require('../img/samurai.png') } />
+        <div>x{player.units[1]}</div>
     </Paper>
     </Grid>
     <Grid item xs={4}>
       <Paper>
+        Viking
         <img width="100%" alt="Viking" src={ require('../img/viking.png') } />
         <div>x{player.units[2]}</div>
       </Paper>
